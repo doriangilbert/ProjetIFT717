@@ -1,6 +1,5 @@
 package com.example.projetift717.model
 
-//
 data class Event (
     val id: String,
     val name: String,
