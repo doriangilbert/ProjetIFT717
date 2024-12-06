@@ -6,6 +6,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
+    // On indique l'adresse du serveur node.js sur la machine hôte de l'émulateur Android
     private const val BASE_URL = ""
 
     private val client = OkHttpClient.Builder()

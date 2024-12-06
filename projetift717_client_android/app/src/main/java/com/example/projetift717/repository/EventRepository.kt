@@ -8,7 +8,7 @@ class EventRepository(private val eventService: EventService) {
         return eventService.fetchAll()
     }
 
-    suspend fun fetch(id: String): Event {
+    suspend fun fetchById(id: String): Event {
         return eventService.fetch(id)
     }
 

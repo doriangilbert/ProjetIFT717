@@ -2,8 +2,8 @@ package com.example.projetift717.repository
 
 import com.example.projetift717.model.User
 import com.example.projetift717.network.UserService
-import com.example.projetift717.network.requests.LoginRequest
-import com.example.projetift717.network.requests.LoginResponse
+import com.example.projetift717.model.requests.LoginRequest
+import com.example.projetift717.model.requests.LoginResponse
 
 class UserRepository(private val userService: UserService) {
     suspend fun fetchAll(): List<User> {

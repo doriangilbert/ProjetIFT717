@@ -1,4 +1,4 @@
-package com.example.projetift717.network.requests
+package com.example.projetift717.model.requests
 
 import com.example.projetift717.model.User
 

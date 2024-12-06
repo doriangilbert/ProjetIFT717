@@ -1,4 +1,4 @@
-package com.example.projetift717.ui.screen
+package com.example.projetift717.view
 
 import androidx.compose.runtime.Composable
 
