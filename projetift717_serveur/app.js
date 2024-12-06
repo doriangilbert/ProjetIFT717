@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
+const eventRoutes = require('./routes/eventRoutes');
 
 // Middleware pour parser les corps de requêtes JSON
 app.use(express.json());
@@ -26,6 +27,7 @@ mongoose.connect(uri)
 
 // Utilisation des routes
 app.use('/users', userRoutes);
+app.use('/events', eventRoutes);
 
 // Route pour la page d'accueil
 app.get('/', (req, res) => {
