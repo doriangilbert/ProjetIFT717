@@ -23,20 +23,21 @@ import com.example.projetift717.viewmodel.ProfileViewModel
 
 class MainActivity : ComponentActivity() {
     // Les repository
-    private val eventRepository = EventRepository()
-    private val placeRepository = PlaceRepository()
-    private val userRepository = UserRepository()
+    private val eventRepository = EventRepository(
+        eventService = TODO()
+    )
+    private val placeRepository = PlaceRepository(
+        placeService = TODO()
+    )
+    private val userRepository = UserRepository(
+        userService = TODO()
+    )
 
     // Les viewmodel
-    private val eventViewModel = EventsViewModel(eventRepository)
-    private val restaurantViewModel = PlaceRepository()
-    private val restaurantDetailViewModel = UserRepository()
-
-    private val restaurantRepository = RestaurantRepository()
-    private val restaurantViewModel = RestaurantViewModel(restaurantRepository)
-    private val restaurantDetailViewModel = RestaurantDetailViewModel(restaurantRepository)
-    private val menuItemRepository = MenuItemRepository()
-    private val menuItemDetailViewModel = MenuItemDetailViewModel(menuItemRepository)
+    private val eventDetailsViewModel = EventDetailsViewModel(eventRepository)
+    private val eventsViewModel = EventsViewModel(eventRepository)
+    private val placesListViewModel = PlacesListViewModel(placeRepository)
+    private val profileViewModel = ProfileViewModel(userRepository)
 
     /*@Composable
     override fun onCreate(savedInstanceState: Bundle?) {

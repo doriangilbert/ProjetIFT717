@@ -4,23 +4,23 @@ import com.example.projetift717.network.PlaceService
 import com.example.projetift717.model.Place
 
 class PlaceRepository(private val placeService: PlaceService) {
-    suspend fun fetchAll(): List<Place> {
+    suspend fun fetchAllPlaces(): List<Place> {
         return placeService.fetchAll()
     }
 
-    suspend fun fetch(id: String): Place {
+    suspend fun fetchPlaceById(id: String): Place {
         return placeService.fetch(id)
     }
 
-    suspend fun create(place: Place): Place {
+    suspend fun createPlace(place: Place): Place {
         return placeService.create(place)
     }
 
-    suspend fun update(id: String, place: Place): Place {
+    suspend fun updatePlace(id: String, place: Place): Place {
         return placeService.update(id, place)
     }
 
-    suspend fun delete(id: String): Place {
+    suspend fun deletePlace(id: String): Place {
         return placeService.delete(id)
     }
 }

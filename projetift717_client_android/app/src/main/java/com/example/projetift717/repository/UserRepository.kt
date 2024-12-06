@@ -6,23 +6,23 @@ import com.example.projetift717.model.requests.LoginRequest
 import com.example.projetift717.model.requests.LoginResponse
 
 class UserRepository(private val userService: UserService) {
-    suspend fun fetchAll(): List<User> {
+    suspend fun fetchAllUsers(): List<User> {
         return userService.fetchAll()
     }
 
-    suspend fun fetch(id: String): User {
+    suspend fun fetchUserById(id: String): User {
         return userService.fetch(id)
     }
 
-    suspend fun create(user: User): User {
+    suspend fun createUser(user: User): User {
         return userService.create(user)
     }
 
-    suspend fun update(id: String, user: User): User {
+    suspend fun updateUser(id: String, user: User): User {
         return userService.update(id, user)
     }
 
-    suspend fun delete(id: String): User {
+    suspend fun deleteUser(id: String): User {
         return userService.delete(id)
     }
 
