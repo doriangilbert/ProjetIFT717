@@ -6,6 +6,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const placeRoutes = require('./routes/placeRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 
 // Middleware pour parser les corps de requêtes JSON
 app.use(express.json());
@@ -30,6 +31,7 @@ mongoose.connect(uri)
 app.use('/users', userRoutes);
 app.use('/events', eventRoutes);
 app.use('/places', placeRoutes);
+app.use('/chat', chatRoutes);
 
 // Route pour la page d'accueil
 app.get('/', (req, res) => {
