@@ -17,6 +17,7 @@ import com.example.projetift717.network.RetrofitInstance
 import com.example.projetift717.repository.EventRepository
 import com.example.projetift717.repository.PlaceRepository
 import com.example.projetift717.repository.UserRepository
+import com.example.projetift717.repository.ChatRepository
 
 // import des differents viewmodel
 import com.example.projetift717.viewmodel.EventDetailsViewModel
@@ -24,22 +25,26 @@ import com.example.projetift717.viewmodel.PlacesListViewModel
 import com.example.projetift717.viewmodel.ProfileViewModel
 import com.example.projetift717.viewmodel.EventsViewModel
 import com.example.projetift717.viewmodel.UserViewModel
+import com.example.projetift717.viewmodel.ChatViewModel
 
 class MainActivity : ComponentActivity() {
     // Les repository
     private val eventRepository = EventRepository()
     private val placeRepository = PlaceRepository()
     private lateinit var userRepository: UserRepository
+    private val chatRepository = ChatRepository()
 
     // Les viewmodel
     private val eventDetailsViewModel = EventDetailsViewModel(eventRepository)
     private val eventsViewModel = EventsViewModel(eventRepository)
     private val placesListViewModel = PlacesListViewModel(placeRepository)
-    private val profileViewModel = ProfileViewModel(userRepository)
+    private lateinit var profileViewModel: ProfileViewModel
+    private val chatViewModel = ChatViewModel(chatRepository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userRepository = UserRepository(this)
+        profileViewModel = ProfileViewModel(userRepository)
         val userVM = UserViewModel(userRepository)
 
         enableEdgeToEdge()
@@ -57,7 +62,7 @@ class MainActivity : ComponentActivity() {
                         ProfileView(viewModel = profileViewModel, navController = navController)
                     }
                     composable("ChatBotView") {
-                        ChatBotView(navController = navController)
+                        ChatBotView(viewModel = chatViewModel, navController = navController)
                     }
                     composable("PlacesListView") {
                         PlacesListView(viewModel = placesListViewModel, navController = navController)

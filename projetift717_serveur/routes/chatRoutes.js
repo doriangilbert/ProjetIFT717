@@ -4,7 +4,7 @@ const chatController = require('../controllers/chatController');
 const {authenticateToken, checkAdmin} = require('../middlewares/authMiddleware');
 
 // Route permettant de chatter avec l'intelligence artificielle
-router.get('/', authenticateToken, chatController.getChat);
+router.post('/', authenticateToken, chatController.getChat);
 
 // Export du router
 module.exports = router;
