@@ -23,15 +23,13 @@ import com.example.projetift717.viewmodel.EventDetailsViewModel
 import com.example.projetift717.viewmodel.PlacesListViewModel
 import com.example.projetift717.viewmodel.ProfileViewModel
 import com.example.projetift717.viewmodel.EventsViewModel
+import com.example.projetift717.viewmodel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     // Les repository
-    /*private val eventRepository = EventRepository(RetrofitInstance.eventService)
-    private val placeRepository = PlaceRepository(RetrofitInstance.placeService)
-    private val userRepository = UserRepository(RetrofitInstance.userService)*/
     private val eventRepository = EventRepository()
     private val placeRepository = PlaceRepository()
-    private val userRepository = UserRepository()
+    private lateinit var userRepository: UserRepository
 
     // Les viewmodel
     private val eventDetailsViewModel = EventDetailsViewModel(eventRepository)
@@ -39,9 +37,11 @@ class MainActivity : ComponentActivity() {
     private val placesListViewModel = PlacesListViewModel(placeRepository)
     private val profileViewModel = ProfileViewModel(userRepository)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userRepository = UserRepository(this)
+        val userVM = UserViewModel(userRepository)
+
         enableEdgeToEdge()
         setContent {
             MaterialTheme {
@@ -64,7 +64,9 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                Footer(navController = navController)
+                if (navController.currentBackStackEntry?.destination?.route != "Login") {
+                    Footer(navController = navController)
+                }
             }
         }
 
