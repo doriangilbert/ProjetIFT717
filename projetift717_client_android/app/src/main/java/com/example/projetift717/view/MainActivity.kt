@@ -26,9 +26,12 @@ import com.example.projetift717.viewmodel.EventsViewModel
 
 class MainActivity : ComponentActivity() {
     // Les repository
-    private val eventRepository = EventRepository(RetrofitInstance.eventService)
+    /*private val eventRepository = EventRepository(RetrofitInstance.eventService)
     private val placeRepository = PlaceRepository(RetrofitInstance.placeService)
-    private val userRepository = UserRepository(RetrofitInstance.userService)
+    private val userRepository = UserRepository(RetrofitInstance.userService)*/
+    private val eventRepository = EventRepository()
+    private val placeRepository = PlaceRepository()
+    private val userRepository = UserRepository()
 
     // Les viewmodel
     private val eventDetailsViewModel = EventDetailsViewModel(eventRepository)
@@ -45,42 +48,23 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 //On renseigne tous les chemins pour naviguer de page en page.
-                //On commence par aller à la page d'accueil, ou il y a la liste des lieux.
+                //On commence par aller à la page ou il y a la liste des lieux.
                 NavHost(navController, startDestination = "EventsView") {
                     composable("EventsView") {
                         EventsView(viewModel = eventsViewModel, navController = navController)
                     }
-                    /*composable("RestaurantDetailView/{restaurantId}") { backStackEntry ->
-                        val restaurantId = backStackEntry.arguments?.getString("restaurantId")
-                        if (restaurantId != null) {
-                            RestaurantDetailView(
-                                viewModel = restaurantDetailViewModel,
-                                navController = navController,
-                                restaurantId = restaurantId
-                            )
-                        }
+                    composable("ProfileView") {
+                        ProfileView(viewModel = profileViewModel, navController = navController)
                     }
-                    composable("RestaurantDetailView/{restaurantId}/MenuItemDetailView/{menuItemId}") { backStackEntry ->
-                        val restaurantId = backStackEntry.arguments?.getString("restaurantId")
-                        val menuItemId = backStackEntry.arguments?.getString("menuItemId")
-                        if (restaurantId != null && menuItemId != null) {
-                            MenuItemDetailView(
-                                viewModel = menuItemDetailViewModel,
-                                navController = navController,
-                                restaurantId = restaurantId,
-                                menuItemId = menuItemId
-                            )
-                        }
+                    composable("ChatBotView") {
+                        ChatBotView(navController = navController)
                     }
-
-                    composable("CartView") {
-                        CartView(viewModel = restaurantDetailViewModel, navController = navController)
-                    }*/
-                    /*composable("Login") {
-                        LoginScreen(navController)
-                    }*/
-                    // Ajouter d'autres destinations
+                    composable("PlacesListView") {
+                        PlacesListView(viewModel = placesListViewModel, navController = navController)
+                    }
                 }
+
+                Footer(navController = navController)
             }
         }
 

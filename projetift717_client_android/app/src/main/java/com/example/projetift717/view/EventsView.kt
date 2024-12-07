@@ -1,7 +1,6 @@
 package com.example.projetift717.view
 
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,14 +23,13 @@ import androidx.navigation.NavController
 import com.example.projetift717.model.Event
 import com.example.projetift717.viewmodel.EventsViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun EventsView(viewModel: EventsViewModel, navController: NavController) {
     val events by viewModel.events.collectAsState()
 
     Column {
         EventList(events = events, navController = navController)
-        Footer()
     }
 }
 

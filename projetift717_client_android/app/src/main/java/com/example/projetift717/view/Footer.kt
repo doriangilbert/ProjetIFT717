@@ -9,10 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.projetift717.R
 
 @Composable
-fun Footer() {
+fun Footer(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxHeight()
     ) {
@@ -28,19 +29,19 @@ fun Footer() {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { /* Handle chatbot action */ }) {
+                IconButton(onClick = { navController.navigate("ChatBotView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_robot), contentDescription = "Chatbot")
                 }
-                IconButton(onClick = { /* Handle place action */ }) {
+                IconButton(onClick = { navController.navigate("PlacesListView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_place), contentDescription = "Place")
                 }
-                IconButton(onClick = { /* Handle card action */ }) {
+                IconButton(onClick = { navController.navigate("EventsView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_map), contentDescription = "Card")
                 }
-                IconButton(onClick = { /* Handle calendar action */ }) {
+                IconButton(onClick = { navController.navigate("EventsView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_calendar), contentDescription = "Calendar")
                 }
-                IconButton(onClick = { /* Handle person action */ }) {
+                IconButton(onClick = { navController.navigate("ProfileView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_user), contentDescription = "Person")
                 }
             }

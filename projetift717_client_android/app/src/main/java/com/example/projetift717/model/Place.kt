@@ -1,11 +1,13 @@
 package com.example.projetift717.model
 
+import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
 
 // Un lieu que l'on peut visiter dans la ville de Sherbrooke
 data class Place (
     // L'identifiant unique de l'endroit
-    val id: String,
+    @SerializedName("_id") val id: String,
+    //val id: String,
     // Le nom de l'endroit
     val name: String,
     // L'adresse de l'endroit
