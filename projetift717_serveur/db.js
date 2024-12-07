@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const Event = require('./models/Event');
+const Place = require('./models/Place');
 require('dotenv').config(); // Charger les variables d'environnement depuis le fichier .env
 
 // URI pour la connexion à l'instance MongoDB locale
@@ -31,6 +33,8 @@ async function addSampleData() {
     try {
         // Supprimer les collections existantes
         await mongoose.connection.dropCollection('users');
+        await mongoose.connection.dropCollection('events');
+        await mongoose.connection.dropCollection('places');
 
         // Création des utilisateurs
         const users = [
@@ -53,6 +57,52 @@ async function addSampleData() {
         // Sauvegarde des utilisateurs
         for (const user of users) {
             await user.save();
+        }
+
+        // Création des événements
+        const events = [
+            new Event({
+                name: 'Match de Hockey',
+                date: new Date('2024-12-31T00:00:00.000+00:00'),
+                description: 'Ce match de Hockey opposera l\'équipe des Phoenix de Sherbrooke contre …',
+                address: 'Palais des Sports Léopold-Drolet',
+                price: 5
+            }),
+            new Event({
+                name: '5 à 8',
+                date: new Date('2024-12-19T00:00:00.000+00:00'),
+                description: 'Pour fêter la fin de la session Automne 2024, nous vous invitons à pro…',
+                address: 'Centre culturel de l\'école',
+                price: 7.5
+            })
+        ];
+
+        // Sauvegarde des événements
+        for (const event of events) {
+            await event.save();
+        }
+
+        // Création des lieux
+        const places = [
+            new Place({
+                name: 'Lac des Nations',
+                address: '220 Rue Marchant, Sherbrooke, QC J1J 3V2',
+                latitude: 45.39735614787705,
+                longitude: -71.91689524091339,
+                type: 'lake'
+            }),
+            new Place({
+                name: 'Mont Bellevue',
+                address: '1440 Rue Brébeuf, Sherbrooke, QC J1H 3G2',
+                latitude: 45.384403137373035,
+                longitude: -71.90838527840393,
+                type: 'mountain'
+            })
+        ];
+
+        // Sauvegarde des lieux
+        for (const place of places) {
+            await place.save();
         }
 
         console.log("Données d'échantillon ajoutées avec succès");
