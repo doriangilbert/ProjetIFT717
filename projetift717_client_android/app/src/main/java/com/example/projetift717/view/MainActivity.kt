@@ -33,9 +33,8 @@ class MainActivity : ComponentActivity() {
     // Les repository
     private lateinit var eventRepository: EventRepository
     private lateinit var placeRepository: PlaceRepository
-
     private lateinit var userRepository: UserRepository
-    private val chatRepository = ChatRepository()
+    private lateinit var chatRepository: ChatRepository;
 
     // Les viewmodel
     private lateinit var eventDetailsViewModel: EventDetailsViewModel
@@ -43,6 +42,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var placesListViewModel: PlacesListViewModel
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var userViewModel: UserViewModel
+    private lateinit var chatViewModel: ChatViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +50,14 @@ class MainActivity : ComponentActivity() {
         eventRepository = EventRepository()
         placeRepository = PlaceRepository()
         userRepository = UserRepository(this)
+        chatRepository = ChatRepository()
 
         eventDetailsViewModel = EventDetailsViewModel(eventRepository)
         eventsViewModel = EventsViewModel(eventRepository)
         placesListViewModel = PlacesListViewModel(placeRepository)
         profileViewModel = ProfileViewModel(userRepository)
         userViewModel = UserViewModel(userRepository)
+        chatViewModel = ChatViewModel(chatRepository)
 
         enableEdgeToEdge()
         setContent {
