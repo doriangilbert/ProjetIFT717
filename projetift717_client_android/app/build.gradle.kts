@@ -79,4 +79,5 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.converter.scalars)
+    implementation(libs.logging.interceptor)
 }

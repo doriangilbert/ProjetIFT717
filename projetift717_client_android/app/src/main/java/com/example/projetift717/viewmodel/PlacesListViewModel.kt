@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 // Les imports des fichiers du projet
 import com.example.projetift717.model.Place
 import com.example.projetift717.repository.PlaceRepository
+import kotlin.io.path.Path
 
 // Les donnees pour la page affichant la liste des evenements
 class PlacesListViewModel(private val repository: PlaceRepository) : ViewModel() {
@@ -23,7 +24,10 @@ class PlacesListViewModel(private val repository: PlaceRepository) : ViewModel()
 
     private fun fetchAllEvents() {
         viewModelScope.launch {
-            _places.value = repository.fetchAllPlaces()
+            val places = repository.fetchAllPlaces()
+            if (places != null) {
+                _places.value = places
+            }
         }
     }
 }

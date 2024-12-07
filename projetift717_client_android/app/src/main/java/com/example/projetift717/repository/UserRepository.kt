@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.projetift717.model.User
 import com.example.projetift717.model.requests.LoginRequest
 import com.example.projetift717.model.requests.LoginResponse
+import com.example.projetift717.model.requests.RegisterRequest
 //import com.example.projetift717.model.requests.LoginRequest
 //import com.example.projetift717.model.requests.LoginResponse
 import io.github.cdimascio.dotenv.Dotenv
@@ -19,32 +20,113 @@ class UserRepository(context: Context) {
     private val api = RetrofitInstance.userService
     private val sharedPreferences = context.getSharedPreferences("user_token_prefs", Context.MODE_PRIVATE)
 
-    suspend fun fetchAllUsers(): List<User> = withContext(Dispatchers.IO) {
-        api.fetchAllUsers(token)
+    suspend fun fetchAllUsers(): List<User>? {
+        return try {
+            val response = api.fetchAllUsers("Bearer $token")
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    suspend fun fetchUserById(id: String): User = withContext(Dispatchers.IO) {
-        api.fetchUserById(token, id)
+    suspend fun fetchUserById(id: String): User? {
+        return try {
+            val response = api.fetchUserById("Bearer $token", id)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    suspend fun createUser(user: User): User = withContext(Dispatchers.IO) {
-        api.createUser(token,user)
+    suspend fun register(request: RegisterRequest): User? {
+        return try {
+            val response = api.register("Bearer $token", request)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    suspend fun updateUser(id: String, user: User): User = withContext(Dispatchers.IO) {
-        api.updateUser(token,id, user)
+    suspend fun updateUser(id: String, user: User): User? {
+        return try {
+            val response = api.updateUser(token, id, user)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    suspend fun deleteUser(id: String): User = withContext(Dispatchers.IO) {
-        api.deleteUser(token, id)
+    suspend fun deleteUser(id: String): User? {
+        return try {
+            val response = api.deleteUser(token, id)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    suspend fun login(request: LoginRequest): LoginResponse = withContext(Dispatchers.IO) {
-        api.login(request)
+    suspend fun login(request: LoginRequest): LoginResponse? {
+        return try {
+            val response = api.login(request)
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body?.token != null) {
+                    saveToken(body.token)
+                }
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
-    suspend fun logout(user: User): User {
-        return api.logout(user)
+    suspend fun logout(user: User): User? {
+        return try {
+            val response = api.logout(user)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
     fun getToken(): String? = sharedPreferences.getString("auth_token", null)

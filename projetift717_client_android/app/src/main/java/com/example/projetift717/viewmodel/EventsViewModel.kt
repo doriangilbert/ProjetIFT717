@@ -35,12 +35,13 @@ class EventsViewModel(private val repository: EventRepository) : ViewModel() {
         }
     }*/
 
-    private fun fetchAllEvents() {
+    fun fetchAllEvents() {
         viewModelScope.launch {
             val eventList = repository.fetchAllEvents()
-            _events.value = eventList
-            //_events.value = repository.fetchAllEvents()
-            Log.d("EventsViewModel", "Fetched events: $eventList")
+            if (eventList != null) {
+               _events.value = eventList
+                Log.d("EventsViewModel", "Fetched events: $eventList")
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -27,7 +28,9 @@ import com.example.projetift717.viewmodel.EventsViewModel
 @Composable
 fun EventsView(viewModel: EventsViewModel, navController: NavController) {
     val events by viewModel.events.collectAsState()
-
+    LaunchedEffect(key1 = Unit) {
+        viewModel.fetchAllEvents()
+    }
     Column {
         EventList(events = events, navController = navController)
     }
