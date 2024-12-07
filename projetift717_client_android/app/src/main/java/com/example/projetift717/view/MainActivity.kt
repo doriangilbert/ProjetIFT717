@@ -19,6 +19,7 @@ import com.example.projetift717.network.RetrofitInstance
 import com.example.projetift717.repository.EventRepository
 import com.example.projetift717.repository.PlaceRepository
 import com.example.projetift717.repository.UserRepository
+import com.example.projetift717.repository.ChatRepository
 
 // import des differents viewmodel
 import com.example.projetift717.viewmodel.EventDetailsViewModel
@@ -26,6 +27,7 @@ import com.example.projetift717.viewmodel.PlacesListViewModel
 import com.example.projetift717.viewmodel.ProfileViewModel
 import com.example.projetift717.viewmodel.EventsViewModel
 import com.example.projetift717.viewmodel.UserViewModel
+import com.example.projetift717.viewmodel.ChatViewModel
 
 class MainActivity : ComponentActivity() {
     // Les repository
@@ -33,6 +35,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var placeRepository: PlaceRepository
 
     private lateinit var userRepository: UserRepository
+    private val chatRepository = ChatRepository()
 
     // Les viewmodel
     private lateinit var eventDetailsViewModel: EventDetailsViewModel
@@ -76,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         ProfileView(viewModel = profileViewModel, navController = navController)
                     }
                     composable("ChatBotView") {
-                        ChatBotView(navController = navController)
+                        ChatBotView(viewModel = chatViewModel, navController = navController)
                     }
                     composable("PlacesListView") {
                         PlacesListView(viewModel = placesListViewModel, navController = navController)

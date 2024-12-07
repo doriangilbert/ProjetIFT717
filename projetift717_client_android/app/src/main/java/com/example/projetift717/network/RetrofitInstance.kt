@@ -41,4 +41,12 @@ object RetrofitInstance {
             .build()
             .create(UserService::class.java)
     }
+
+    val chatService: ChatService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ChatService::class.java)
+    }
 }
