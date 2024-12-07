@@ -13,31 +13,36 @@ import com.example.projetift717.R
 
 @Composable
 fun Footer() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Green)
-            .padding(16.dp)
+    Column(
+        modifier = Modifier.fillMaxHeight()
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+        Spacer(modifier = Modifier.weight(1f))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color(0xFF006400))
+                .padding(16.dp)
         ) {
-            IconButton(onClick = { /* Handle chatbot action */ }) {
-                Icon(painter = painterResource(id = R.drawable.ic_robot), contentDescription = "Chatbot")
-            }
-            IconButton(onClick = { /* Handle place action */ }) {
-                Icon(painter = painterResource(id = R.drawable.ic_place), contentDescription = "Place")
-            }
-            IconButton(onClick = { /* Handle card action */ }) {
-                Icon(painter = painterResource(id = R.drawable.ic_map), contentDescription = "Card")
-            }
-            IconButton(onClick = { /* Handle calendar action */ }) {
-                Icon(painter = painterResource(id = R.drawable.ic_calendar), contentDescription = "Calendar")
-            }
-            IconButton(onClick = { /* Handle person action */ }) {
-                Icon(painter = painterResource(id = R.drawable.ic_user), contentDescription = "Person")
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = { /* Handle chatbot action */ }) {
+                    Icon(painter = painterResource(id = R.drawable.ic_robot), contentDescription = "Chatbot")
+                }
+                IconButton(onClick = { /* Handle place action */ }) {
+                    Icon(painter = painterResource(id = R.drawable.ic_place), contentDescription = "Place")
+                }
+                IconButton(onClick = { /* Handle card action */ }) {
+                    Icon(painter = painterResource(id = R.drawable.ic_map), contentDescription = "Card")
+                }
+                IconButton(onClick = { /* Handle calendar action */ }) {
+                    Icon(painter = painterResource(id = R.drawable.ic_calendar), contentDescription = "Calendar")
+                }
+                IconButton(onClick = { /* Handle person action */ }) {
+                    Icon(painter = painterResource(id = R.drawable.ic_user), contentDescription = "Person")
+                }
             }
         }
     }

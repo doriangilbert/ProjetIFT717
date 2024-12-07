@@ -1,5 +1,6 @@
 package com.example.projetift717.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
@@ -21,9 +22,25 @@ class EventsViewModel(private val repository: EventRepository) : ViewModel() {
         fetchAllEvents()
     }
 
+    /*private fun fetchAllEvents() {
+        viewModelScope.launch {
+            Log.d("salut", "programme")
+            try {
+                val eventList = repository.fetchAllEvents()
+                _events.value = eventList
+                Log.d("EventsViewModel", "Fetched events: $eventList")
+            } catch (e: Exception) {
+                Log.e("EventsViewModel", "Error fetching events", e)
+            }
+        }
+    }*/
+
     private fun fetchAllEvents() {
         viewModelScope.launch {
-            _events.value = repository.fetchAllEvents()
+            val eventList = repository.fetchAllEvents()
+            _events.value = eventList
+            //_events.value = repository.fetchAllEvents()
+            Log.d("EventsViewModel", "Fetched events: $eventList")
         }
     }
 }
