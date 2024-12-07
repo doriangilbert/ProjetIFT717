@@ -5,10 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+
+// import de l'Instance Retrofit pour obtenir toutes les routes et les utiliser
+import com.example.projetift717.network.RetrofitInstance
 
 // import des differents repository
 import com.example.projetift717.repository.EventRepository
@@ -17,21 +19,15 @@ import com.example.projetift717.repository.UserRepository
 
 // import des differents viewmodel
 import com.example.projetift717.viewmodel.EventDetailsViewModel
-import com.example.projetift717.viewmodel.EventsViewModel
 import com.example.projetift717.viewmodel.PlacesListViewModel
 import com.example.projetift717.viewmodel.ProfileViewModel
+import com.example.projetift717.viewmodel.EventsViewModel
 
 class MainActivity : ComponentActivity() {
     // Les repository
-    private val eventRepository = EventRepository(
-        eventService = TODO()
-    )
-    private val placeRepository = PlaceRepository(
-        placeService = TODO()
-    )
-    private val userRepository = UserRepository(
-        userService = TODO()
-    )
+    private val eventRepository = EventRepository(RetrofitInstance.eventService)
+    private val placeRepository = PlaceRepository(RetrofitInstance.placeService)
+    private val userRepository = UserRepository(RetrofitInstance.userService)
 
     // Les viewmodel
     private val eventDetailsViewModel = EventDetailsViewModel(eventRepository)
@@ -39,7 +35,7 @@ class MainActivity : ComponentActivity() {
     private val placesListViewModel = PlacesListViewModel(placeRepository)
     private val profileViewModel = ProfileViewModel(userRepository)
 
-    /*@Composable
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -48,12 +44,12 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 //On renseigne tous les chemins pour naviguer de page en page.
-                //On commence par aller à la page d'accueil, ou il y a la liste des restaurants.
-                NavHost(navController, startDestination = "MainScreen") {
-                    composable("MainScreen") {
-                        MainScreen(viewModel = restaurantViewModel, navController = navController)
+                //On commence par aller à la page d'accueil, ou il y a la liste des lieux.
+                NavHost(navController, startDestination = "EventsView") {
+                    composable("EventsView") {
+                        EventsView(viewModel = eventsViewModel, navController = navController)
                     }
-                    composable("RestaurantDetailView/{restaurantId}") { backStackEntry ->
+                    /*composable("RestaurantDetailView/{restaurantId}") { backStackEntry ->
                         val restaurantId = backStackEntry.arguments?.getString("restaurantId")
                         if (restaurantId != null) {
                             RestaurantDetailView(
@@ -78,7 +74,7 @@ class MainActivity : ComponentActivity() {
 
                     composable("CartView") {
                         CartView(viewModel = restaurantDetailViewModel, navController = navController)
-                    }
+                    }*/
                     /*composable("Login") {
                         LoginScreen(navController)
                     }*/
@@ -86,5 +82,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }*/
+    }
 }

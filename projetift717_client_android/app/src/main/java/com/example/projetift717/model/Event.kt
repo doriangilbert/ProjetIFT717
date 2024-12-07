@@ -1,5 +1,7 @@
 package com.example.projetift717.model
 
+import java.time.LocalDate
+
 // Un evenement qui se deroule dans la ville de Sherbrooke
 data class Event (
     // L'identifiant unique de l'evenement
@@ -11,7 +13,7 @@ data class Event (
     // La description de l'evenement
     val description: String,
     // La date de l'evenement
-    val date: String,
+    val date: LocalDate,
     // L'adresse de l'evenement
     val address: String,
     // La liste des utilisateurs inscrits a l'evenement
