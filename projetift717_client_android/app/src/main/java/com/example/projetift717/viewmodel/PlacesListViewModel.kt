@@ -13,16 +13,16 @@ import com.example.projetift717.model.Place
 import com.example.projetift717.repository.PlaceRepository
 import kotlin.io.path.Path
 
-// Les donnees pour la page affichant la liste des evenements
+// Les donnees pour la page affichant la liste des lieux
 class PlacesListViewModel(private val repository: PlaceRepository) : ViewModel() {
     private val _places = MutableStateFlow<List<Place>>(emptyList())
     val places = _places.asStateFlow()
 
     init {
-        fetchAllEvents()
+        fetchAllPlaces()
     }
 
-    private fun fetchAllEvents() {
+    fun fetchAllPlaces() {
         viewModelScope.launch {
             val places = repository.fetchAllPlaces()
             if (places != null) {
