@@ -35,7 +35,7 @@ fun Footer(navController: NavController) {
                 IconButton(onClick = { navController.navigate("PlacesListView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_place), contentDescription = "Place")
                 }
-                IconButton(onClick = { navController.navigate("EventsView") }) {
+                IconButton(onClick = { navController.navigate("MapView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_map), contentDescription = "Card")
                 }
                 IconButton(onClick = { navController.navigate("EventsView") }) {

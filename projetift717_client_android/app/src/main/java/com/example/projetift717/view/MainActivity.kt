@@ -6,14 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.projetift717.model.User
 
 // import de l'Instance Retrofit pour obtenir toutes les routes et les utiliser
-import com.example.projetift717.network.RetrofitInstance
 
 // import des differents repository
 import com.example.projetift717.repository.EventRepository
@@ -86,6 +83,10 @@ class MainActivity : ComponentActivity() {
                     composable("PlacesListView") {
                         PlacesListView(viewModel = placesListViewModel, navController = navController)
                     }
+                    composable("MapView") {
+                        MapView(navController = navController)
+                    }
+
                 }
                 Footer(navController = navController)
             }
