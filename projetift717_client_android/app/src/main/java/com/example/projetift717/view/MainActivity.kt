@@ -10,8 +10,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-// import de l'Instance Retrofit pour obtenir toutes les routes et les utiliser
-
 // import des differents repository
 import com.example.projetift717.repository.EventRepository
 import com.example.projetift717.repository.PlaceRepository
@@ -86,7 +84,15 @@ class MainActivity : ComponentActivity() {
                     composable("MapView") {
                         MapView(navController = navController)
                     }
-
+                    composable("EventDetailsView/{eventId}") { backStackEntry ->
+                        val eventId = backStackEntry.arguments?.getString("eventId")
+                        if (eventId != null) {
+                            EventDetailsView(viewModel = eventDetailsViewModel, navController = navController, eventId = eventId)
+                        }
+                    }
+                    composable("PaymentView") {
+                        PaymentPage()
+                    }
                 }
                 Footer(navController = navController)
             }

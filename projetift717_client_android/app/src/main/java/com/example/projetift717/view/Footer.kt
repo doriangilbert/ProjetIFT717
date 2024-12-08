@@ -36,10 +36,10 @@ fun Footer(navController: NavController) {
                     Icon(painter = painterResource(id = R.drawable.ic_place), contentDescription = "Place")
                 }
                 IconButton(onClick = { navController.navigate("MapView") }) {
-                    Icon(painter = painterResource(id = R.drawable.ic_map), contentDescription = "Card")
+                    Icon(painter = painterResource(id = R.drawable.ic_map), contentDescription = "Map")
                 }
                 IconButton(onClick = { navController.navigate("EventsView") }) {
-                    Icon(painter = painterResource(id = R.drawable.ic_calendar), contentDescription = "Calendar")
+                    Icon(painter = painterResource(id = R.drawable.ic_calendar), contentDescription = "Event")
                 }
                 IconButton(onClick = { navController.navigate("ProfileView") }) {
                     Icon(painter = painterResource(id = R.drawable.ic_user), contentDescription = "Person")
