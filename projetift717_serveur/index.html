@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Client Notifications ProjetIFT717</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const pathSegments = window.location.pathname.split('/');
+    const clientId = pathSegments[pathSegments.length - 1];
+
+    socket.on('connect', () => {
+      console.log('Connecté au serveur');
+      socket.emit('register', clientId);
+      document.getElementById('status').innerText = `Connecté en tant que client ID : ${clientId}`;
+    });
+
+    socket.on('notification', (data) => {
+      console.log('Notification reçue :', data);
+      if (data.type === 'EVENT_JOINED') {
+        alert(`Confirmation d'inscription à l'événement : \nNom : ${data.event.name}\nDate : ${new Date(data.event.date).toLocaleString()}\nAdresse : ${data.event.address}`);
+      } else if (data.type === 'EVENT_LEFT') {
+        alert(`Confirmation de désinscription de l'événement : \nNom : ${data.event.name}\nDate : ${new Date(data.event.date).toLocaleString()}\nAdresse : ${data.event.address}`);
+      } else {
+        alert(`Notification reçue : \nType : ${data.type}\nDétails : ${JSON.stringify(data)}`);
+      }
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Déconnecté du serveur');
+    });
+  </script>
+</head>
+<body>
+<h1>Client Notifications ProjetIFT717</h1>
+<p id="status"></p>
+</body>
+</html>

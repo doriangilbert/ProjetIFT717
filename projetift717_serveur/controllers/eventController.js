@@ -1,5 +1,6 @@
 const Event = require('../models/Event');
 const User = require('../models/User');
+const {notifyUser} = require('../utils/socketUtils');
 
 // Récupérer tous les événements
 exports.getAllEvents = async (req, res) => {
@@ -81,6 +82,11 @@ exports.addUserToEvent = async (req, res) => {
         user.events.push(event._id);
         await event.save();
         await user.save();
+
+        // Notifier l'utilisateur de son inscription à l'événement
+        const io = req.app.get('io');
+        notifyUser(io, user._id.toString(), {type: 'EVENT_JOINED', event});
+
         res.json(event);
     } catch (err) {
         console.error(err);
@@ -103,6 +109,11 @@ exports.removeUserFromEvent = async (req, res) => {
         user.events = user.events.filter(eventId => eventId.toString() !== req.params.id);
         await event.save();
         await user.save();
+
+        // Notifier l'utilisateur de sa désinscription de l'événement
+        const io = req.app.get('io');
+        notifyUser(io, user._id.toString(), {type: 'EVENT_LEFT', event});
+
         res.json(event);
     } catch (err) {
         console.error(err);
