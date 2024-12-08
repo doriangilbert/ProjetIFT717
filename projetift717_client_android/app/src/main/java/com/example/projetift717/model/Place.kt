@@ -7,7 +7,6 @@ import java.time.LocalDate
 data class Place (
     // L'identifiant unique de l'endroit
     @SerializedName("_id") val id: String,
-    //val id: String,
     // Le nom de l'endroit
     val name: String,
     // L'adresse de l'endroit

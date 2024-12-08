@@ -34,6 +34,7 @@ fun EventsView(viewModel: EventsViewModel, navController: NavController) {
     Column {
         EventList(events = events, navController = navController)
     }
+    Footer(navController = navController)
 }
 
 @Composable

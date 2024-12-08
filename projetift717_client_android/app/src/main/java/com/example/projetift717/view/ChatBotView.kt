@@ -54,6 +54,7 @@ fun ChatBotView(viewModel: ChatViewModel, navController: NavController) {
         }
         ChatInput(viewModel = viewModel)
     }
+    Footer(navController = navController)
 }
 
 @Composable

@@ -90,11 +90,13 @@ class MainActivity : ComponentActivity() {
                             EventDetailsView(viewModel = eventDetailsViewModel, navController = navController, eventId = eventId)
                         }
                     }
-                    composable("PaymentView") {
-                        PaymentPage()
+                    composable("EventDetailsView/{eventId}/PaymentView") { backStackEntry ->
+                        val eventId = backStackEntry.arguments?.getString("eventId")
+                        if (eventId != null) {
+                            PaymentView(viewModel = eventDetailsViewModel, navController = navController, eventId = eventId)
+                        }
                     }
                 }
-                Footer(navController = navController)
             }
         }
 

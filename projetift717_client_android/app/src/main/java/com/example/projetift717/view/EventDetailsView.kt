@@ -1,26 +1,26 @@
 package com.example.projetift717.view
 
-import android.graphics.Bitmap
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import androidx.navigation.NavController
 import com.example.projetift717.viewmodel.EventDetailsViewModel
+
 
 @Composable
 fun EventDetailsView(viewModel: EventDetailsViewModel, navController: NavController, eventId: String) {
     viewModel.fetchEvent(eventId)
     val event by viewModel.event.collectAsState()
-
-    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
 
     Box(
         modifier = Modifier
@@ -30,29 +30,49 @@ fun EventDetailsView(viewModel: EventDetailsViewModel, navController: NavControl
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 56.dp) // Adjust this value based on the height of the footer
+                .padding(bottom = 56.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             event?.let {
-                Text(text = "Name: ${it.name}")
+
+                val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formattedDate = LocalDate.parse(it.date.substring(0, 10)).format(dateFormatter)
+
+                Text(
+                    text = it.name,
+                    style = MaterialTheme.typography.headlineLarge.copy(fontSize = 30.sp),
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    shadowElevation = 4.dp,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = it.description,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(text = "Date: $formattedDate")
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Description: ${it.description}")
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Date: ${it.date}")
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Price: ${it.price}")
+                Text(text = "${it.price}$")
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = "Address: ${it.address}")
                 Spacer(modifier = Modifier.height(8.dp))
             }
             Spacer(modifier = Modifier.weight(1f))
             Button(
-                onClick = { navController.navigate("PaymentView") },
+                onClick = { navController.navigate("EventDetailsView/${eventId}/PaymentView") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                Text("Go to Payment")
+                Text("Procéder au paiement")
             }
         }
     }
+    Footer(navController = navController)
 }

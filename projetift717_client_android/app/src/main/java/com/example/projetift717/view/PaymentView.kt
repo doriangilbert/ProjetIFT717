@@ -21,9 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.projetift717.viewmodel.EventDetailsViewModel
 
 @Composable
-fun PaymentPage() {
+fun PaymentView(viewModel: EventDetailsViewModel, navController: NavController, eventId: String) {
     var cardNumber by remember { mutableStateOf("") }
     var cardHolder by remember { mutableStateOf("") }
     var expiryMonth by remember { mutableStateOf("") }
@@ -39,7 +41,7 @@ fun PaymentPage() {
         TextField(
             value = cardNumber,
             onValueChange = { cardNumber = it },
-            label = { Text("Card Number") },
+            label = { Text("Numéro de la carte") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
@@ -47,7 +49,7 @@ fun PaymentPage() {
         TextField(
             value = cardHolder,
             onValueChange = { cardHolder = it },
-            label = { Text("Card Holder") },
+            label = { Text("Titulaire de la carte") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -58,14 +60,14 @@ fun PaymentPage() {
             TextField(
                 value = expiryMonth,
                 onValueChange = { expiryMonth = it },
-                label = { Text("Expiry Month") },
+                label = { Text("Mois d'expiration") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.weight(1f)
             )
             TextField(
                 value = expiryYear,
                 onValueChange = { expiryYear = it },
-                label = { Text("Expiry Year") },
+                label = { Text("Année d'expiration") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.weight(1f)
             )
@@ -74,7 +76,7 @@ fun PaymentPage() {
         TextField(
             value = cvv,
             onValueChange = { cvv = it },
-            label = { Text("CVV") },
+            label = { Text("Code de sécurité") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
@@ -87,4 +89,5 @@ fun PaymentPage() {
             Text("Submit Payment")
         }
     }
+    Footer(navController = navController)
 }

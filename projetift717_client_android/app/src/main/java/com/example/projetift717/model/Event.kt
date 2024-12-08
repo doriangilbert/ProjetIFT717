@@ -1,7 +1,6 @@
 package com.example.projetift717.model
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
 
 // Un evenement qui se deroule dans la ville de Sherbrooke
 data class Event (

@@ -122,4 +122,5 @@ fun MapView(navController: NavHostController) {
             locationPermissionState.launchPermissionRequest()
         }
     }
+    Footer(navController = navController)
 }

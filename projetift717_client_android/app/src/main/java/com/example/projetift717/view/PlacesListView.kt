@@ -31,6 +31,7 @@ fun PlacesListView(viewModel: PlacesListViewModel, navController: NavController)
     Column {
         PlaceList(places = places, navController = navController)
     }
+    Footer(navController = navController)
 }
 
 @Composable
