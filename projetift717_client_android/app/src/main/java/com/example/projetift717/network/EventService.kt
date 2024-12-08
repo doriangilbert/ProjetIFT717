@@ -11,6 +11,9 @@ interface EventService {
     @GET("/events/{id}")
     suspend fun fetchEventById(@Header("Authorization") token: String, @Path("id") id: String): Response<Event>
 
+    @GET("/events/user/{id}")
+    suspend fun fetchEventsByUserId(@Header("Authorization") token: String, @Path("id") id: String): Response<List<Event>>
+
     @POST("/events")
     suspend fun createEvent(@Header("Authorization") token: String, @Body event: Event): Response<Event>
 

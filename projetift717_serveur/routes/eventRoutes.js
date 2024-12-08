@@ -7,6 +7,8 @@ const {authenticateToken, checkAdmin} = require('../middlewares/authMiddleware')
 router.get('/', authenticateToken, eventController.getAllEvents);
 // Route permettant de récupérer un événement par son ID
 router.get('/:id', authenticateToken, eventController.getEventById);
+// Route permettant de récupérer les événements d'un utilisateur
+router.get('/user/:id', authenticateToken, eventController.getEventsRelatedToUser);
 // Route permettant de créer un événement
 router.post('/', authenticateToken, checkAdmin(), eventController.createEvent);
 // Route permettant de mettre à jour un événement

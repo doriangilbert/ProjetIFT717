@@ -4,8 +4,6 @@ package com.example.projetift717.repository
 
 import com.example.projetift717.model.Event
 import com.example.projetift717.network.RetrofitInstance
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class EventRepository {
     //private val token: String = Dotenv.load().get("API")
@@ -31,6 +29,21 @@ class EventRepository {
     suspend fun fetchEventById(id: String): Event? {
         return try {
             val response = api.fetchEventById("Bearer $token", id)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    suspend fun fetchEventsByUserId(userId: String): List<Event>? {
+        return try {
+            val response = api.fetchEventsByUserId("Bearer $token", userId)
             if (response.isSuccessful) {
                 response.body()
             } else {

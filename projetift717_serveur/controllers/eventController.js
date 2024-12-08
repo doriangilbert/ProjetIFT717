@@ -27,6 +27,19 @@ exports.getEventById = async (req, res) => {
     }
 };
 
+exports.getEventsRelatedToUser = async (req, res) => {
+    try {
+        const events = await Event.find({ users: req.params.id });
+        if (!events) {
+            return res.status(404).json({error: err.message});
+        }
+        res.json(events);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: err.message});
+    }
+}
+
 // Créer un événement
 exports.createEvent = async (req, res) => {
     try {
