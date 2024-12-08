@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -44,17 +46,17 @@ fun RegisterScreen(vm: UserViewModel, navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text("Register")
+        Text("Inscription")
         TextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Name") },
+            label = { Text("Nom") },
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
         )
         TextField(
             value = surname,
             onValueChange = { surname = it },
-            label = { Text("Surname") },
+            label = { Text("Prénom") },
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
         )
         TextField(
@@ -67,7 +69,7 @@ fun RegisterScreen(vm: UserViewModel, navController: NavController) {
         TextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text("Mot de passe") },
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
             visualTransformation = PasswordVisualTransformation()
         )
@@ -77,15 +79,17 @@ fun RegisterScreen(vm: UserViewModel, navController: NavController) {
                 vm.register(name, surname, email, password)
                 navController.navigate("Login")
             },
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier.padding(vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400))
         ) {
-            Text("Register")
+            Text("S'inscrire")
         }
         Button(
             onClick = { navController.navigate("Login") },
-            modifier = Modifier.padding(vertical = 8.dp)
+            modifier = Modifier.padding(vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400))
         ) {
-            Text("Login")
+            Text("Se connecter")
         }
     }
 }

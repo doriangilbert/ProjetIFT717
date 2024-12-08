@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -49,7 +51,7 @@ fun PaymentView(viewModel: EventDetailsViewModel, navController: NavController, 
         TextField(
             value = cardHolder,
             onValueChange = { cardHolder = it },
-            label = { Text("Titulaire de la carte") },
+            label = { Text("Nom du titulaire de la carte") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -84,9 +86,10 @@ fun PaymentView(viewModel: EventDetailsViewModel, navController: NavController, 
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = { /* Handle payment submission */ },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400))
         ) {
-            Text("Submit Payment")
+            Text("Valider le paiement")
         }
     }
     Footer(navController = navController)

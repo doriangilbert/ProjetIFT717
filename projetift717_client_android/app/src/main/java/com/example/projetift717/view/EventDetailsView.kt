@@ -3,12 +3,14 @@ package com.example.projetift717.view
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.time.LocalDate
@@ -56,11 +58,11 @@ fun EventDetailsView(viewModel: EventDetailsViewModel, navController: NavControl
                     )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Date: $formattedDate")
+                Text(text = "Date : $formattedDate")
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = "${it.price}$")
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Address: ${it.address}")
+                Text(text = "Adresse : ${it.address}")
                 Spacer(modifier = Modifier.height(8.dp))
             }
             Spacer(modifier = Modifier.weight(1f))
@@ -68,7 +70,8 @@ fun EventDetailsView(viewModel: EventDetailsViewModel, navController: NavControl
                 onClick = { navController.navigate("EventDetailsView/${eventId}/PaymentView") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400))
             ) {
                 Text("Procéder au paiement")
             }

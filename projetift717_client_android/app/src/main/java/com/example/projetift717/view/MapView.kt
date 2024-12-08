@@ -145,13 +145,13 @@ fun MapView(navController: NavHostController) {
             title = { Text(text = selectedPlace!!.name) },
             text = {
                 Column {
-                    Text(text = "Address: ${selectedPlace!!.address}")
+                    Text(text = "Adresse: ${selectedPlace!!.address}")
                     Text(text = "Latitude: ${selectedPlace!!.latitude}")
                     Text(text = "Longitude: ${selectedPlace!!.longitude}")
                     Text(text = "Type: ${selectedPlace!!.type}")
-                    Text(text = "Opening Hours: ${selectedPlace!!.openingHours}")
-                    Text(text = "Closing Hours: ${selectedPlace!!.closingHours}")
-                    Text(text = "Preferred Time: ${selectedPlace!!.preferredTime}")
+                    Text(text = "Heure d'ouverture: ${selectedPlace!!.openingHours}")
+                    Text(text = "Heure de fermeture: ${selectedPlace!!.closingHours}")
+                    Text(text = "Heure idéale de visite: ${selectedPlace!!.preferredTime}")
                 }
             },
             confirmButton = {

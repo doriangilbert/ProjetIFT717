@@ -49,7 +49,7 @@ fun ProfileView(viewModel: ProfileViewModel, navController: NavController) {
                 }
             }
             else {
-                Text("No events")
+                Text("Pas d'événements")
             }
         }
 
@@ -60,10 +60,10 @@ fun ProfileView(viewModel: ProfileViewModel, navController: NavController) {
 @Composable
 fun Profile(user: User) {
     Spacer(modifier = Modifier.height(32.dp))
-    Text(text = "Profile", style = MaterialTheme.typography.headlineLarge)
+    Text(text = "Profil", style = MaterialTheme.typography.headlineLarge)
     Spacer(modifier = Modifier.height(16.dp))
-    ProfileField(label = "Name", value = user.name)
-    ProfileField(label = "Surname", value = user.surname)
+    ProfileField(label = "Nom", value = user.name)
+    ProfileField(label = "Prénom", value = user.surname)
     ProfileField(label = "Email", value = user.email)
 }
 
