@@ -12,8 +12,8 @@ data class Place (
     // L'adresse de l'endroit
     val address: String,
     // Des coordonnées latitude et longitude pour l'emplacement de l'endroit
-    val latitude: Float,
-    val longitude: Float,
+    val latitude: Double,
+    val longitude: Double,
     // Une enumeration des types d'endroit que l'on peut rencontrer
     val type: PlaceType,
     // L'horaire d'ouverture
