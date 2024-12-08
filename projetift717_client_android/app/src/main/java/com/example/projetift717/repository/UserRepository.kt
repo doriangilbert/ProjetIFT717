@@ -102,6 +102,8 @@ class UserRepository(context: Context) {
                 val body = response.body()
                 if (body?.token != null) {
                     saveToken(body.token)
+                    saveUserId(body.userId)
+                    saveTokenExpiration(body.tokenExpiration)
                 }
                 response.body()
             } else {
@@ -130,6 +132,9 @@ class UserRepository(context: Context) {
     }
 
     fun getToken(): String? = sharedPreferences.getString("auth_token", null)
-
+    fun getUserId(): String? = sharedPreferences.getString("user_id", null)
+    fun getTokenExpiration(): Long = sharedPreferences.getLong("token_expiration", 0L)
     fun saveToken(token: String) = sharedPreferences.edit().putString("auth_token", token).apply()
+    fun saveUserId(userId: String) = sharedPreferences.edit().putString("user_id", userId).apply()
+    fun saveTokenExpiration(tokenExpiration: Long) = sharedPreferences.edit().putLong("token_expiration", tokenExpiration).apply()
 }
