@@ -23,13 +23,14 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.projetift717.model.requests.LoginResponse
 
 @Composable
-fun LoginScreen(vm: UserViewModel, navController: NavController) {
+fun LoginScreen(vm: UserViewModel, navController: NavController, context: MainActivity) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     val responseObserver = Observer<LoginResponse?> { response ->
         if (response?.token != null) {
-            navController.navigate("EventsView")
+            context.connectToNotifications()
+            navController.navigate("MapView")
         }
     }
     vm.loginResponse.observe(LocalLifecycleOwner.current, responseObserver)

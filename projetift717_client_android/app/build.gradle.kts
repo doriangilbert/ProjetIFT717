@@ -83,4 +83,5 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.osmdroid.android)
     implementation(libs.accompanist.permissions)
+    implementation(libs.socket.io.client)
 }

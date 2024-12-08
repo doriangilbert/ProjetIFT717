@@ -21,6 +21,7 @@ osmdroidAndroid = "6.1.11"
 retrofit = "lts"
 retrofitVersion = "2.9.0"
 playServicesLocation = "21.3.0"
+socketIoClient = "2.0.1"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
@@ -54,6 +55,7 @@ osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "os
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-v290 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+socket-io-client = { module = "io.socket:socket.io-client", version.ref = "socketIoClient" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
