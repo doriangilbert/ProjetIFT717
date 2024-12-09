@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var userViewModel: UserViewModel
     private lateinit var chatViewModel: ChatViewModel
+    private lateinit var placeDetailsViewModel: PlaceDetailsViewModel
 
     private lateinit var mSocket: Socket
 
@@ -55,6 +56,7 @@ class MainActivity : ComponentActivity() {
         profileViewModel = ProfileViewModel(userRepository, eventRepository)
         userViewModel = UserViewModel(userRepository)
         chatViewModel = ChatViewModel(chatRepository)
+        placeDetailsViewModel = PlaceDetailsViewModel(placeRepository)
 
         enableEdgeToEdge()
         setContent {
@@ -92,6 +94,12 @@ class MainActivity : ComponentActivity() {
                         val eventId = backStackEntry.arguments?.getString("eventId")
                         if (eventId != null) {
                             PaymentView(viewModel = eventDetailsViewModel, navController = navController, eventId = eventId)
+                        }
+                    }
+                    composable("PlaceDetailsView/{placeId}") { backStackEntry ->
+                        val placeId = backStackEntry.arguments?.getString("placeId")
+                        if (placeId != null) {
+                            PlaceDetailsView(viewModel = placeDetailsViewModel, navController = navController, placeId = placeId)
                         }
                     }
                 }
