@@ -20,6 +20,9 @@ interface EventService {
     @PUT("/events/{id}")
     suspend fun updateEvent(@Header("Authorization") token: String, @Path("id") id: String, @Body event: Event): Response<Event>
 
-    @POST("/events/{id}")
+    @DELETE("/events/{id}")
     suspend fun deleteEvent(@Header("Authorization") token: String, @Path("id") id: String): Response<Event>
+
+    @PUT("/events/{id}/addUser")
+    suspend fun addUserToEvent(@Header("Authorization") token: String, @Path("id") id: String, @Body userId: Map<String, String>): Response<Event>
 }
