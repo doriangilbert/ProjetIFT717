@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var userViewModel: UserViewModel
     private lateinit var chatViewModel: ChatViewModel
     private lateinit var placeDetailsViewModel: PlaceDetailsViewModel
+    private lateinit var addEventViewModel: AddEventViewModel
 
     private lateinit var mSocket: Socket
 
@@ -51,11 +52,12 @@ class MainActivity : ComponentActivity() {
         chatRepository = ChatRepository()
 
         eventDetailsViewModel = EventDetailsViewModel(eventRepository, userRepository)
-        eventsViewModel = EventsViewModel(eventRepository)
+        eventsViewModel = EventsViewModel(eventRepository, userRepository)
         placesListViewModel = PlacesListViewModel(placeRepository)
         profileViewModel = ProfileViewModel(userRepository, eventRepository)
         userViewModel = UserViewModel(userRepository)
         chatViewModel = ChatViewModel(chatRepository)
+        addEventViewModel = AddEventViewModel(eventRepository)
         placeDetailsViewModel = PlaceDetailsViewModel(placeRepository)
 
         enableEdgeToEdge()
@@ -101,6 +103,9 @@ class MainActivity : ComponentActivity() {
                         if (placeId != null) {
                             PlaceDetailsView(viewModel = placeDetailsViewModel, navController = navController, placeId = placeId)
                         }
+                    }
+                    composable("AddEventView") {
+                        AddEventView(viewModel = addEventViewModel, navController = navController)
                     }
                 }
             }

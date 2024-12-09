@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 
 // Les imports des fichiers du projet
 import com.example.projetift717.model.Event
+import com.example.projetift717.model.User
 import com.example.projetift717.repository.EventRepository
 import com.example.projetift717.repository.UserRepository
 
@@ -17,6 +18,29 @@ import com.example.projetift717.repository.UserRepository
 class EventDetailsViewModel(private val eventRepository: EventRepository, private val userRepository: UserRepository) : ViewModel() {
     private val _event = MutableStateFlow<Event?>(null)
     val event = _event.asStateFlow()
+    private val _user = MutableStateFlow<User?>(null)
+    val user = _user.asStateFlow()
+    private val _events = MutableStateFlow<List<Event>?>(null)
+    val events = _events.asStateFlow()
+
+    fun fetchProfile() {
+        viewModelScope.launch {
+            val userId = getUserId()
+            if (userId != null) {
+                _user.value = userRepository.fetchUserById(userId)
+                fetchEvents()
+            }
+        }
+    }
+
+    fun fetchEvents() {
+        viewModelScope.launch {
+            println(_user.value)
+            if (_user.value != null) {
+                _events.value = eventRepository.fetchEventsByUserId(_user.value!!.id)
+            }
+        }
+    }
 
     fun fetchEvent(eventId: String) {
         viewModelScope.launch {

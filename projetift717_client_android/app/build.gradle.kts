@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation("org.mongodb:bson:4.4.0")
     implementation(libs.dotenv.kotlin)
     implementation(libs.retrofit.v290)
     implementation(libs.converter.gson.v290)

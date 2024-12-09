@@ -22,7 +22,12 @@ import com.example.projetift717.viewmodel.EventDetailsViewModel
 @Composable
 fun EventDetailsView(viewModel: EventDetailsViewModel, navController: NavController, eventId: String) {
     viewModel.fetchEvent(eventId)
+    viewModel.fetchProfile()
     val event by viewModel.event.collectAsState()
+    val user by viewModel.user.collectAsState()
+    val events by viewModel.events.collectAsState()
+
+    val isUserRegistered = events?.any { it.id == eventId } == true
 
     Box(
         modifier = Modifier
@@ -67,13 +72,16 @@ fun EventDetailsView(viewModel: EventDetailsViewModel, navController: NavControl
             }
             Spacer(modifier = Modifier.weight(1f))
             Button(
-                onClick = { navController.navigate("EventDetailsView/${eventId}/PaymentView") },
+                onClick = { if (!isUserRegistered) navController.navigate("EventDetailsView/${eventId}/PaymentView") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400))
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (isUserRegistered) Color.Gray else Color(0xFF006400)
+                ),
+                enabled = !isUserRegistered
             ) {
-                Text("Procéder au paiement")
+                Text(if (isUserRegistered) "Vous êtes déjà inscrit" else "Procéder au paiement")
             }
         }
     }

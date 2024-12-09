@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,11 +30,27 @@ import com.example.projetift717.viewmodel.EventsViewModel
 @Composable
 fun EventsView(viewModel: EventsViewModel, navController: NavController) {
     val events by viewModel.events.collectAsState()
+    val user by viewModel.user.collectAsState()
+
     LaunchedEffect(key1 = Unit) {
         viewModel.fetchAllEvents()
+        viewModel.fetchProfile()
     }
     Column {
         EventList(events = events, navController = navController)
+        if (user?.isAdmin == true) {
+            Button(
+                onClick = { navController.navigate("AddEventView") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Blue
+                )
+            ) {
+                Text("Ajouter un événement")
+            }
+        }
     }
     Footer(navController = navController)
 }
