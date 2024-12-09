@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
+import com.example.projetift717.R
 import com.example.projetift717.repository.PlaceRepository
 import com.example.projetift717.model.Place
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -28,7 +29,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
 @OptIn(ExperimentalPermissionsApi::class)
-@SuppressLint("MissingPermission", "PermissionLaunchedDuringComposition")
+@SuppressLint("MissingPermission", "PermissionLaunchedDuringComposition", "UseCompatLoadingForDrawables")
 @Composable
 fun MapView(navController: NavHostController) {
     val context = LocalContext.current
@@ -45,8 +46,25 @@ fun MapView(navController: NavHostController) {
         if (locationPermissionState.status.isGranted) {
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
             fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                currentLocation = location
+                if (location != null) {
+                    currentLocation = location
+                    println("Current location: ${location.latitude}, ${location.longitude}")
+                    mapView?.controller?.setCenter(GeoPoint(location.latitude, location.longitude))
+                    mapView?.controller?.setZoom(18.0) // Set the desired zoom level
+                    val currentLocationMarker = Marker(mapView)
+                    currentLocationMarker.position = GeoPoint(location.latitude, location.longitude)
+                    currentLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                    currentLocationMarker.title = "Current Location"
+                    currentLocationMarker.icon = context.getDrawable(R.drawable.ic_position)
+                    mapView?.overlays?.add(currentLocationMarker)
+                } else {
+                    println("Failed to retrieve current location")
+                }
+            }.addOnFailureListener {
+                println("Error retrieving location: ${it.message}")
             }
+        } else {
+            println("Location permission not granted")
         }
     }
 
@@ -78,6 +96,7 @@ fun MapView(navController: NavHostController) {
                     currentLocationMarker.position = GeoPoint(it.latitude, it.longitude)
                     currentLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                     currentLocationMarker.title = "Current Location"
+                    currentLocationMarker.icon = context.getDrawable(R.drawable.ic_position)
                     mapView.overlays.add(currentLocationMarker)
                 }
                 places?.forEach { place ->
@@ -104,11 +123,13 @@ fun MapView(navController: NavHostController) {
                     currentLocation?.let {
                         val centerPoint = GeoPoint(it.latitude, it.longitude)
                         mapView?.controller?.setCenter(centerPoint)
-                        mapView?.overlays?.clear()
-                        val marker = Marker(mapView)
-                        marker.position = centerPoint
-                        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                        mapView?.overlays?.add(marker)
+                        mapView?.controller?.setZoom(18.0) // Set the desired zoom level
+                        val currentLocationMarker = Marker(mapView)
+                        currentLocationMarker.position = centerPoint
+                        currentLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                        currentLocationMarker.title = "Current Location"
+                        currentLocationMarker.icon = context.getDrawable(R.drawable.ic_position)
+                        mapView?.overlays?.add(currentLocationMarker)
                     }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400)),
