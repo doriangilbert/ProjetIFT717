@@ -1,7 +1,7 @@
 package com.example.projetift717.model
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
+import java.sql.Timestamp
 
 // Un lieu que l'on peut visiter dans la ville de Sherbrooke
 data class Place (
@@ -18,9 +18,9 @@ data class Place (
     val type: PlaceType,
     // L'horaire d'ouverture
     // Concerne les lieux comme les restaurants, les bars, les musees.
-    val openingHours: LocalDate,
-    val closingHours: LocalDate,
+    val openingHours: Timestamp,
+    val closingHours: Timestamp,
     // La meilleure heure pour visiter ce lieu et profiter de sa plus belle vue.
     // Concerne les lieux en pleine nature: parcs, montagnes, lacs.
-    val preferredTime: LocalDate
+    val preferredTime: Timestamp
 )

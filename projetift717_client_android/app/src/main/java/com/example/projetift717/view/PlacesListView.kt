@@ -77,7 +77,7 @@ fun Header(viewModel: PlacesListViewModel) {
             Text("Distance")
         }
         SegmentedButton(
-            onClick = { selectedOption = 2; viewModel.sortByDistance(context = context) },
+            onClick = { selectedOption = 2; viewModel.sortByPreferredDate() },
             selected = selectedOption == 2,
             shape = SegmentedButtonDefaults.itemShape(index = 2, count = 3)
         ) {

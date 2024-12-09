@@ -15,6 +15,8 @@ import com.example.projetift717.repository.PlaceRepository
 import com.google.android.gms.location.LocationServices
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.Calendar
 import java.util.Date
 
 // Les donnees pour la page affichant la liste des lieux
@@ -65,9 +67,7 @@ class PlacesListViewModel(private val placeRepo: PlaceRepository) : ViewModel() 
 
     fun sortByPreferredDate() {
         viewModelScope.launch {
-            val now: LocalDate = LocalDate.now()
-            val sortedPlaces = _places.value.sortedBy { place -> now.compareTo(place.preferredTime) }
-            _places.value = sortedPlaces
+            _places.value = _places.value.sortedBy { it.preferredTime }
         }
     }
 }
