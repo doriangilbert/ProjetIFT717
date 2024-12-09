@@ -16,6 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.projetift717.viewmodel.PlaceDetailsViewModel
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -51,16 +54,19 @@ fun PlaceDetailsView(viewModel: PlaceDetailsViewModel, placeId: String, navContr
             val formatter = DateTimeFormatter.ofPattern("HH:mm")
             it.openingHours?.let { openingHours ->
                 it.closingHours?.let { closingHours ->
+                    val openingDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(openingHours.seconds.toLong()), ZoneId.systemDefault())
+                    val closingDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(closingHours.seconds.toLong()), ZoneId.systemDefault())
                     Text(
-                        text = "Opening Hours: ${openingHours.format(formatter)} - ${closingHours.format(formatter)}",
+                        text = "Opening Hours: ${openingDateTime.format(formatter)} - ${closingDateTime.format(formatter)}",
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                 }
             }
             it.preferredTime?.let { preferredTime ->
+                val preferredDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(preferredTime.seconds.toLong()), ZoneId.systemDefault())
                 Text(
-                    text = "Preferred Time: ${preferredTime.format(formatter)}",
+                    text = "Preferred Time: ${preferredDateTime.format(formatter)}",
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
