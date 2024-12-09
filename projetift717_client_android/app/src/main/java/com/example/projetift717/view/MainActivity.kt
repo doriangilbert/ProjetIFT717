@@ -186,6 +186,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mSocket.disconnect()
+        // Check if mSocket is initialized before using it
+        if (::mSocket.isInitialized) {
+            mSocket.disconnect()
+            mSocket.close()
+        }
     }
 }

@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,28 +33,31 @@ fun ProfileView(viewModel: ProfileViewModel, navController: NavController) {
     }
 
     if (user != null) {
-        Column(
+        LazyColumn(
             modifier = Modifier.fillMaxSize().padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Profile(user = user!!)
-            Spacer(modifier = Modifier.height(16.dp))
+            item {
+                Profile(user = user!!)
+                Spacer(modifier = Modifier.height(16.dp))
+            }
             if (events != null) {
-                (events as Iterable<Event?>).forEach { event ->
+                items(events as List<Event?>) { event ->
                     EventItem(
                         event!!,
                         onClick = {
                             navController.navigate("EventDetailsView/${event.id}")
                         }
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            } else {
+                item {
+                    Text("Pas d'événements")
                 }
             }
-            else {
-                Text("Pas d'événements")
-            }
         }
-
     }
     Footer(navController = navController)
 }
