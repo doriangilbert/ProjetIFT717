@@ -97,6 +97,76 @@ async function addSampleData() {
                 latitude: 45.384403137373035,
                 longitude: -71.90838527840393,
                 type: 'mountain'
+            }),
+            new Place({
+                name: 'Parc du Marquis-de-Montcalm',
+                address: '2050 Boulevard de Portland, Sherbrooke, QC J1J 1V9',
+                latitude: 45.4027690715768,
+                longitude: -71.92505078484756,
+                type: 'park'
+            }),
+            new Place({
+                name: 'Musée des Beaux-Arts de Sherbrooke',
+                address: '241 Rue Dufferin, Sherbrooke, QC J1H 4M6',
+                latitude: 45.40512836634967,
+                longitude: -71.89451092953463,
+                type: 'museum'
+            }),
+            new Place({
+                name: 'Bar le King Hall',
+                address: '286 Rue King O, Sherbrooke, QC J1H 1R1',
+                latitude: 45.39951239224474,
+                longitude: -71.89357917567749,
+                type: 'bar'
+            }),
+            new Place({
+                name: 'Restaurant Auguste',
+                address: '82 Rue Wellington N, Sherbrooke, QC J1H 5B8',
+                latitude: 45.402838864827885,
+                longitude: -71.8908885337172,
+                type: 'restaurant'
+            }),
+            new Place({
+                name: 'Théâtre Granada',
+                address: '53 Rue Wellington N, Sherbrooke, QC J1H 5A9',
+                latitude: 45.402258864841365,
+                longitude: -71.89113342116276,
+                type: 'museum'
+            }),
+            new Place({
+                name: 'Parc du Domaine-Howard',
+                address: '1300 Boulevard de Portland, Sherbrooke, QC J1J 1V9',
+                latitude: 45.40254739428749,
+                longitude: -71.90956490502606,
+                type: 'park'
+            }),
+            new Place({
+                name: 'Café Bla-Bla',
+                address: '2 Rue Wellington S, Sherbrooke, QC J1H 5C7',
+                latitude: 45.4012356634831,
+                longitude: -71.8899603462312,
+                type: 'restaurant'
+            }),
+            new Place({
+                name: 'Boquébière',
+                address: '50 Rue Wellington N, Sherbrooke, QC J1H 5B7',
+                latitude: 45.402366829104224,
+                longitude: -71.89065424328896,
+                type: 'bar'
+            }),
+            new Place({
+                name: 'Parc Lucien-Blanchard',
+                address: '755 Rue Cabana, Sherbrooke, QC J1K 2M2',
+                latitude: 45.39460537908967,
+                longitude: -71.92741076461404,
+                type: 'park'
+            }),
+            new Place({
+                name: 'Palais des sports Léopold-Drolet',
+                address: '360 Rue du Cégep, Sherbrooke, QC J1E 2J9',
+                latitude: 45.41032837169569,
+                longitude: -71.88383031529085,
+                type: 'museum'
             })
         ];
 

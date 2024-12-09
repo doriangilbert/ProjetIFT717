@@ -37,6 +37,12 @@ fun EventsView(viewModel: EventsViewModel, navController: NavController) {
         viewModel.fetchProfile()
     }
     Column {
+        Text(
+            text = "Liste des événements",
+            style = MaterialTheme.typography.titleLarge,
+            color = Color(0xFF4CAF50),
+            modifier = Modifier.padding(16.dp)
+        )
         EventList(events = events, navController = navController)
         if (user?.isAdmin == true) {
             Button(
@@ -45,7 +51,7 @@ fun EventsView(viewModel: EventsViewModel, navController: NavController) {
                     .fillMaxWidth()
                     .padding(16.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Blue
+                    containerColor = Color(0xFF006400)
                 )
             ) {
                 Text("Ajouter un événement")

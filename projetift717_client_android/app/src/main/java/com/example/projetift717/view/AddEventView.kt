@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.projetift717.model.Event
@@ -29,7 +30,7 @@ fun AddEventView(viewModel: AddEventViewModel, navController: NavController) {
         TextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Name") },
+            label = { Text("Nom") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -50,14 +51,14 @@ fun AddEventView(viewModel: AddEventViewModel, navController: NavController) {
         TextField(
             value = price,
             onValueChange = { price = it },
-            label = { Text("Price") },
+            label = { Text("Prix") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
             value = address,
             onValueChange = { address = it },
-            label = { Text("Address") },
+            label = { Text("Adresse") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -82,14 +83,17 @@ fun AddEventView(viewModel: AddEventViewModel, navController: NavController) {
                         navController.navigate("EventsView")
                     }
                 } else {
-                    errorMessage = "All fields must be filled"
+                    errorMessage = "Tous les champs sont obligatoires"
                 }
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF006400)
+            )
         ) {
-            Text("Add Event")
+            Text("Ajouter l'événement")
         }
         Spacer(modifier = Modifier.height(8.dp))
         Footer(navController = navController)

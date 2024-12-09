@@ -85,4 +85,5 @@ dependencies {
     implementation(libs.osmdroid.android)
     implementation(libs.accompanist.permissions)
     implementation(libs.socket.io.client)
+    implementation(libs.mongodb.bson)
 }
