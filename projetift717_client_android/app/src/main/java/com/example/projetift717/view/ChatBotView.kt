@@ -1,19 +1,17 @@
 package com.example.projetift717.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -24,11 +22,18 @@ import kotlinx.coroutines.launch
 fun ChatBotView(viewModel: ChatViewModel, navController: NavController) {
     val chatHistory by viewModel.chatHistory.collectAsState()
     val listState = rememberLazyListState()
+    val context = LocalContext.current
+    val sharedPreferences = context.getSharedPreferences("chatbot_prefs", Context.MODE_PRIVATE)
+    val showWelcomeDialog = remember { mutableStateOf(sharedPreferences.getBoolean("show_welcome_dialog", true)) }
 
     LaunchedEffect(chatHistory) {
         if (chatHistory.isNotEmpty()) {
             listState.animateScrollToItem(chatHistory.size - 1)
         }
+    }
+
+    if (showWelcomeDialog.value) {
+        WelcomeDialog(sharedPreferences, showWelcomeDialog)
     }
 
     Column(
@@ -55,6 +60,47 @@ fun ChatBotView(viewModel: ChatViewModel, navController: NavController) {
         ChatInput(viewModel = viewModel)
     }
     Footer(navController = navController)
+}
+
+@Composable
+fun WelcomeDialog(sharedPreferences: SharedPreferences, showWelcomeDialog: MutableState<Boolean>) {
+    var doNotShowAgain by remember { mutableStateOf(false) }
+
+    AlertDialog(
+        onDismissRequest = { showWelcomeDialog.value = false },
+        title = { Text("Bienvenue") },
+        text = {
+            Column {
+                Text("Bienvenue dans le chatbot!")
+                Text("Ce chatbot utilise Mistral AI pour répondre à vos questions.")
+                Text("Après avoir saisi une requête, veuillez patienter un moment pour la réponse.")
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(
+                        checked = doNotShowAgain,
+                        onCheckedChange = { doNotShowAgain = it },
+                        colors = CheckboxDefaults.colors(
+                            checkedColor = Color(0xFF006400),
+                            uncheckedColor = Color(0xFF006400)
+                        )
+                    )
+                    Text("Ne plus afficher")
+                }
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = {
+                    if (doNotShowAgain) {
+                        sharedPreferences.edit().putBoolean("show_welcome_dialog", false).apply()
+                    }
+                    showWelcomeDialog.value = false
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF006400))
+            ) {
+                Text("OK")
+            }
+        }
+    )
 }
 
 @Composable
