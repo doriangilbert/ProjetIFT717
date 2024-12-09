@@ -81,7 +81,7 @@ fun Header(viewModel: PlacesListViewModel) {
             selected = selectedOption == 2,
             shape = SegmentedButtonDefaults.itemShape(index = 2, count = 3)
         ) {
-            Text("Date")
+            Text("Horaire idéal")
         }
     }
 

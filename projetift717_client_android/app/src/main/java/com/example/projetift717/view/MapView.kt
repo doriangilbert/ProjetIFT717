@@ -127,7 +127,7 @@ fun MapView(navController: NavHostController) {
                         val currentLocationMarker = Marker(mapView)
                         currentLocationMarker.position = centerPoint
                         currentLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-                        currentLocationMarker.title = "Current Location"
+                        currentLocationMarker.title = "Position Actuelle"
                         currentLocationMarker.icon = context.getDrawable(R.drawable.ic_position)
                         mapView?.overlays?.add(currentLocationMarker)
                     }
