@@ -2,6 +2,7 @@ package com.example.projetift717.repository
 
 //import io.github.cdimascio.dotenv.Dotenv
 
+import android.util.Log
 import com.example.projetift717.model.Event
 import com.example.projetift717.network.RetrofitInstance
 
@@ -96,6 +97,21 @@ class EventRepository {
             }
         }
         catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    suspend fun addUserToEvent(id: String, userId: String): Event? {
+        return try {
+            val response = api.addUserToEvent("Bearer $token", id, mapOf("userId" to userId))
+            Log.d("EventRepository", "addUserToEvent: $response")
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
             e.printStackTrace()
             null
         }

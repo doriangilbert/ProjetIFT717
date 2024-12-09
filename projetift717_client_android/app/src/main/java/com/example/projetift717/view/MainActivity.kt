@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
         userRepository = UserRepository(this)
         chatRepository = ChatRepository()
 
-        eventDetailsViewModel = EventDetailsViewModel(eventRepository)
+        eventDetailsViewModel = EventDetailsViewModel(eventRepository, userRepository)
         eventsViewModel = EventsViewModel(eventRepository)
         placesListViewModel = PlacesListViewModel(placeRepository)
         profileViewModel = ProfileViewModel(userRepository, eventRepository)
